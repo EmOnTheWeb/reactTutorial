@@ -22,9 +22,14 @@ export default class reactTutorial extends Component {
     var movie = MOCKED_MOVIES_DATA[0];
     return (
       <View style={styles.container}>
-        <Text>{movie.title}</Text>
-        <Text>{movie.year}</Text>
-        <Image source={{uri: movie.posters.thumbnail}} />
+        <Image 
+            source={{uri: movie.posters.thumbnail}} 
+            style ={styles.thumbnail}
+        />
+        <View style={styles.rightContainer}>
+            <Text style={styles.title}>{movie.title}</Text>
+            <Text style={styles.year}>{movie.year}</Text>
+        </View>  
       </View>
     );
   }
@@ -32,20 +37,20 @@ export default class reactTutorial extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
+    flexDirection: 'row', 
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  thumbnail: {
+    width: 53, 
+    height: 81,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  rightContainer: {
+    backgroundColor: 'green', 
+    flex:1, 
+
   },
 });
 
