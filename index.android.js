@@ -7,9 +7,10 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  Image,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 
 export default class reactTutorial extends Component {
