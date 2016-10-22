@@ -9,49 +9,47 @@ import {
   AppRegistry,
   Image,
   StyleSheet,
+  ListView,
   Text,
   View,
+  Navigator
 } from 'react-native';
 
-var MOCKED_MOVIES_DATA = [
-  {title: 'Title', year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}},
-];
+
+import MyScene from './myscene';
 
 export default class reactTutorial extends Component {
-    render() {
-    var movie = MOCKED_MOVIES_DATA[0];
+      
+  render() {
     return (
-      <View style={styles.container}>
-        <Image 
-            source={{uri: movie.posters.thumbnail}} 
-            style ={styles.thumbnail}
-        />
-        <View style={styles.rightContainer}>
-            <Text style={styles.title}>{movie.title}</Text>
-            <Text style={styles.year}>{movie.year}</Text>
-        </View>  
-      </View>
-    );
+      <Navigator
+        initialRoute={{ title: 'My Initial Scene', index: 0 }}
+        renderScene={(route, navigator) =>
+          <MyScene
+            title={route.title}
+
+            // Function to call when a new scene should be displayed           
+            onForward={ () => {    
+              const nextIndex = route.index + 1;
+              navigator.push({
+                title: 'Scene ' + nextIndex,
+                index: nextIndex,
+              });
+            }}
+
+            // Function to call to go back to the previous scene
+            onBack={() => {
+              if (route.index > 0) {
+                navigator.pop();
+              }
+            }}
+          />
+        }
+      />
+    )
   }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    flexDirection: 'row', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  thumbnail: {
-    width: 53, 
-    height: 81,
-  },
-  rightContainer: {
-    backgroundColor: 'green', 
-    flex:1, 
-
-  },
-});
 
 AppRegistry.registerComponent('reactTutorial', () => reactTutorial);
